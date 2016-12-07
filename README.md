@@ -8,7 +8,7 @@
 - dao 数据访问层
 - model 数据模型层
 - remote 调用外部接口
-- remote 对外接口的定义
+- service 对外接口的定义
 - web 展现层
 
 ## 主要技术
