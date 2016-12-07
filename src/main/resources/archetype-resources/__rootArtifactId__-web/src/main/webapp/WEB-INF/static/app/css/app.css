@@ -1,0 +1,53 @@
+.error {
+    color: red;
+}
+.empty {
+    padding: 40px 0px;
+    font-size: 14px;
+    text-align: center;
+}
+
+.empty-message {
+    padding: 40px 0px;
+    font-size: 14px;
+    text-align: center;
+    border-left: 1px solid #f5f5f5;
+    border-right: 1px solid #f5f5f5;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.message-item a {
+    color: #333;
+    font-size: 15px;
+}
+
+input.disabled {
+    color: #fff !important;
+}
+
+.form-modal-body {
+    padding: 15px 0 0 0;
+}
+
+.form-model-footer {
+    margin-top: 15px;
+}
+
+.page-info {
+    color: #000 !important;
+    background: #fff !important;
+    cursor: default;
+}
+
+.page-info:hover {
+    background: #fff !important;
+}
+
+input[readonly].readonly {
+    background: #fff !important;
+    cursor: pointer !important;
+}
+
+.width-10 {
+    width: 10%;
+}
