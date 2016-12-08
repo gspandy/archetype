@@ -81,7 +81,7 @@
     <#if (page.list)?? && page.total gt 0>
     <div class="pull-right">
         <ul class="pagination">
-            <li><a href="javascript:" class="page-info">第 ${page.startRow}~${page.endRow} 条, 共 ${page.total} 条,
+            <li><a href="javascript:" class="page-info">第 ${page.startRow + 1}~${page.endRow + 1} 条, 共 ${page.total} 条,
                 第 ${page.pageNum} 页,
                 共 ${page.pages} 页</a></li>
         </ul>

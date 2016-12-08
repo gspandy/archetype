@@ -4,6 +4,7 @@
 package ${package}.web.controller.web;
 
 import ${package}.biz.service.UserService;
+import ${package}.common.util.NameUtil;
 import ${package}.model.app.vo.User;
 import lombok.extern.log4j.Log4j2;
 import org.apache.shiro.SecurityUtils;
@@ -78,6 +79,8 @@ public class RegisterController {
         if (!result.hasErrors()) {
             try {
                 UsernamePasswordToken token = new UsernamePasswordToken(user.getUsername(), user.getPassword());
+
+                user.setNickName(NameUtil.genName());
 
                 // 保存用户和默认角色
                 userService.saveUserWithDefaultRole(user);

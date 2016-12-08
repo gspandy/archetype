@@ -14,7 +14,7 @@
             <div class="page-header">
                 <h1>
                 ${title!''}
-                    <small>
+                    <small class="pull-right">
                         <@block name="actions"/>
                     </small>
                 </h1>

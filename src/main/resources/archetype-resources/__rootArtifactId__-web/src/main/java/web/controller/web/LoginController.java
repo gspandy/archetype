@@ -66,14 +66,13 @@ public class LoginController {
         log.info("session中的验证码为：{}", realCaptcha);
         log.info("用户上送的验证码为：{}", captcha);
 
-        // TODO 开发环境不验
-//        if (!captcha.equalsIgnoreCase(realCaptcha)) {
-//            String errMsg = "验证码不正确或已失效";
-//            model.addAttribute("errMsg", errMsg);
-//            model.addAttribute("user", user);
-//            log.info(errMsg);
-//            return PATH_INDEX;
-//        }
+        if (!captcha.equalsIgnoreCase(realCaptcha)) {
+            String errMsg = "验证码不正确或已失效";
+            model.addAttribute("errMsg", errMsg);
+            model.addAttribute("user", user);
+            log.info(errMsg);
+            return PATH_INDEX;
+        }
         log.info("验证码正确");
 
         UsernamePasswordToken token = new UsernamePasswordToken(user.getUsername(), user.getPassword());

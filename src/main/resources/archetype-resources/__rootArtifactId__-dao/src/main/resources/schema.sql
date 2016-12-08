@@ -19,7 +19,7 @@ CREATE TABLE user
   COMMENT '密码',
   salt          VARCHAR(64)                           NOT NULL
   COMMENT '密码盐',
-  nick_name     VARCHAR(32)                           NOT NULL                    DEFAULT ''
+  nick_name     VARCHAR(32)                           NOT NULL
   COMMENT '昵称',
   small_avatar  VARCHAR(255)                          NOT NULL                    DEFAULT ''
   COMMENT '小头像',

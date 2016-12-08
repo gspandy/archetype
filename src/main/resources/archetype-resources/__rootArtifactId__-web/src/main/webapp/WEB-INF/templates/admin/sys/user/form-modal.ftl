@@ -36,7 +36,7 @@
             <label>昵称</label>
         </div>
         <div class="col-md-7 controls">
-            <input name="nickName" type="text" value="${user.nickName!''}" class="form-control" placeholder="昵称"/>
+            <input name="nickName" type="text" value="${user.nickName!''}" class="form-control" placeholder="昵称" required/>
         </div>
     </div>
 </div>

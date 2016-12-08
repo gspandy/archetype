@@ -42,7 +42,7 @@
                 <div>
                     <label for="captcha"> 验证码 </label>
                     <div class="input-icon input-icon-right">
-                        <input type="text" name="captcha" value="1234" class="col-xs-3" placeholder="验证码" required
+                        <input type="text" name="captcha" class="col-xs-3" placeholder="验证码" required
                                minlength="4" maxlength="4">
                         <img onclick="this.src='${ctx}/captcha?'+Math.random();" src="${ctx}/captcha">
                     </div>
