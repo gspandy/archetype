@@ -6,7 +6,7 @@
 
     <groupId>com.kangyonggan.archetype</groupId>
     <artifactId>archetype</artifactId>
-    <version>1.0.2.RELEASE</version>
+    <version>1.0.3.RELEASE</version>
     <packaging>maven-archetype</packaging>
 
     <description>项目原型</description>

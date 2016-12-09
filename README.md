@@ -52,7 +52,7 @@ mvn clean install
 3. 使用
 
 ```
-mvn archetype:generate -DarchetypeGroupId=com.kangyonggan.archetype -DarchetypeArtifactId=archetype -DarchetypeVersion=1.0.2.RELEASE -DarchetypeCatalog=local
+mvn archetype:generate -DarchetypeGroupId=com.kangyonggan.archetype -DarchetypeArtifactId=archetype -DarchetypeVersion=1.0.3.RELEASE -DarchetypeCatalog=local
 ```
 
 执行之后会提示你输入新项目的`GroupId`、`ArtifactId`、`Version`、`Package`和最后的确认`Y`

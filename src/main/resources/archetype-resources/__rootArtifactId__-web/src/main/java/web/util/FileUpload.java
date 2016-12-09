@@ -3,7 +3,7 @@
 #set( $symbol_escape = '\' )
 package ${package}.web.util;
 
-import ${package}.biz.util.AppProperties;
+import ${package}.biz.util.PropertiesUtil;
 import ${package}.common.util.DateUtils;
 import ${package}.model.constants.AppConstants;
 import org.apache.commons.io.FilenameUtils;
@@ -44,7 +44,7 @@ public class FileUpload {
      * @throws IOException
      */
     public static File getAbsolutePath(String filename) throws IOException {
-        File desc = new File(AppProperties.getProperties(AppConstants.FILE_PATH_ROOT) + filename);
+        File desc = new File(PropertiesUtil.getProperties(AppConstants.FILE_PATH_ROOT) + filename);
         if (!desc.getParentFile().exists()) {
             desc.getParentFile().mkdirs();
         }
