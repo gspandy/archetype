@@ -23,14 +23,14 @@ public class PropertiesUtil {
     static {
         try {
             props = new Properties();
-            InputStream in = AppProperties.class.getClassLoader().getResourceAsStream("${parentArtifactId}.properties");
+            InputStream in = PropertiesUtil.class.getClassLoader().getResourceAsStream("${parentArtifactId}.properties");
             props.load(in);
         } catch (IOException e) {
             log.error("${parentArtifactId}.properties加载失败", e);
         }
     }
 
-    private AppProperties() {
+    private PropertiesUtil() {
     }
 
     /**
