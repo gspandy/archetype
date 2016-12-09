@@ -50,9 +50,9 @@
     <!-- 配置AOP切面 -->
     <aop:config>
         <!--切点，用于事务-->
-        <aop:pointcut id="transactionPointcut" expression="execution(* com.shhxzq.fin.rms.biz.service.impl..*.*(..))"/>
+        <aop:pointcut id="transactionPointcut" expression="execution(* ${package}.biz.service.impl..*.*(..))"/>
         <!--切点，用于日志-->
-        <aop:pointcut id="target" expression="execution(* com.shhxzq.fin.rms..*.*(..))"/>
+        <aop:pointcut id="target" expression="execution(* ${package}..*.*(..))"/>
 
         <!--事物切面-->
         <aop:advisor pointcut-ref="transactionPointcut" advice-ref="transactionAdvice" order="1"/>
