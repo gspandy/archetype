@@ -75,7 +75,6 @@
     </#if>
 </#macro>
 
-
 <#--分页组件-->
 <#macro pagination url param="">
     <#if (page.list)?? && page.total gt 0>
@@ -88,45 +87,67 @@
     </div>
     <div class="pull-left">
         <ul class="pagination">
-            <li>
-                <a href="${url}?p=1<#if param?has_content>&${param}</#if>">
-                    <i class="ace-icon fa fa-angle-double-left"></i>
-                </a>
-            </li>
-            <li>
-                <#if page.hasPreviousPage>
+            <#if page.hasPreviousPage>
+                <li>
+                    <a href="${url}?p=1<#if param?has_content>&${param}</#if>">
+                        <i class="ace-icon fa fa-angle-double-left"></i>
+                    </a>
+                </li>
+                <li>
                     <a href="${url}?p=${page.prePage}<#if param?has_content>&${param}</#if>">
                         <i class="ace-icon fa fa-angle-left"></i>
                     </a>
-                <#else>
-                    <a href="${url}?p=1<#if param?has_content>&${param}</#if>">
+                </li>
+            <#else>
+                <li>
+                    <a href="javascript:">
+                        <i class="ace-icon fa fa-angle-double-left"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="javascript:">
                         <i class="ace-icon fa fa-angle-left"></i>
                     </a>
-                </#if>
-            </li>
+                </li>
+            </#if>
 
             <#list page.navigatepageNums as nav>
-                <li <#if nav == page.pageNum>class="active"</#if>>
-                    <a href="${url}?p=${nav}<#if param?has_content>&${param}</#if>">${nav}</a>
-                </li>
+                <#if nav == page.pageNum>
+                    <li class="active">
+                        <a href="javascript:">${nav}</a>
+                    </li>
+                <#else>
+                    <li>
+                        <a href="${url}?p=${nav}<#if param?has_content>&${param}</#if>">${nav}</a>
+                    </li>
+                </#if>
             </#list>
 
-            <li>
-                <#if page.hasNextPage>
+            <#if page.hasNextPage>
+                <li>
                     <a href="${url}?p=${page.nextPage}<#if param?has_content>&${param}</#if>">
                         <i class="ace-icon fa fa-angle-right"></i>
                     </a>
-                <#else>
-                    <a href="${url}?p=${page.lastPage}<#if param?has_content>&${param}</#if>">
+                </li>
+
+                <li>
+                    <a href="${url}?p=${page.pages}<#if param?has_content>&${param}</#if>">
+                        <i class="ace-icon fa fa-angle-double-right"></i>
+                    </a>
+                </li>
+            <#else>
+                <li>
+                    <a href="javascript:">
                         <i class="ace-icon fa fa-angle-right"></i>
                     </a>
-                </#if>
-            </li>
-            <li>
-                <a href="${url}?p=${page.pages}<#if param?has_content>&${param}</#if>">
-                    <i class="ace-icon fa fa-angle-double-right"></i>
-                </a>
-            </li>
+                </li>
+
+                <li>
+                    <a href="javascript:">
+                        <i class="ace-icon fa fa-angle-double-right"></i>
+                    </a>
+                </li>
+            </#if>
         </ul>
     </div>
     </#if>
