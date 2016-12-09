@@ -16,6 +16,6 @@
     <!--redis缓存配置-->
     <import resource="applicationContext-redis.xml"/>
     <!--服务提供-->
-    <import resource="applicationContext-provider.xml"/>
+    <!--<import resource="applicationContext-provider.xml"/>-->
 
 </beans>
