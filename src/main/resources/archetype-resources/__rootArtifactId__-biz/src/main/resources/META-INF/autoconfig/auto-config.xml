@@ -27,7 +27,7 @@
         <property name="jdbc.password" description="jdbc密码" defaultValue="123456"/>
 
         <!-- log4j2 -->
-        <property name="log4j2.home" description="log4j2日志的文件主目录" defaultValue="/Users/kyg/logs/${parentArtifactId}"/>
+        <property name="log4j2.home" description="log4j2日志的文件主目录" defaultValue="/Users/kyg/code/${parentArtifactId}/${parentArtifactId}-web/src/main/webapp/WEB-INF/"/>
 
         <property name="file.root.path" description="文件根目录" defaultValue="/Users/kyg/data/${parentArtifactId}/"/>
         <property name="slow.method.time" description="慢方法时间(秒)" defaultValue="10"/>
