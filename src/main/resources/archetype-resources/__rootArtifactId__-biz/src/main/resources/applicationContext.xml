@@ -27,7 +27,7 @@
     </bean>
 
     <!-- 读取属性文件，否则 java 类无法直接读取属性 -->
-    <context:property-placeholder location="classpath:app.properties" />
+    <context:property-placeholder location="classpath:${parentArtifactId}.properties" />
 
     <!-- AOP配置事物 -->
     <tx:advice id="transactionAdvice" transaction-manager="transactionManager">

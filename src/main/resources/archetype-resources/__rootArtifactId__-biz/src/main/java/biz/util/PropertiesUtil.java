@@ -10,23 +10,23 @@ import java.io.InputStream;
 import java.util.Properties;
 
 /**
- * app.properties工具类
+ * ${parentArtifactId}.properties工具类
  *
  * @author kangyonggan
  * @since 2016/12/6
  */
 @Log4j2
-public class AppProperties {
+public class PropertiesUtil {
 
     private static Properties props;
 
     static {
         try {
             props = new Properties();
-            InputStream in = AppProperties.class.getClassLoader().getResourceAsStream("app.properties");
+            InputStream in = AppProperties.class.getClassLoader().getResourceAsStream("${parentArtifactId}.properties");
             props.load(in);
         } catch (IOException e) {
-            log.error("app.properties加载失败", e);
+            log.error("${parentArtifactId}.properties加载失败", e);
         }
     }
 
