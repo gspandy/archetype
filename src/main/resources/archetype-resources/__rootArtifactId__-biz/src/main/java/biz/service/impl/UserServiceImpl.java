@@ -4,6 +4,7 @@
 package ${package}.biz.service.impl;
 
 import com.github.pagehelper.PageHelper;
+import ${package}.biz.annotation.LogTime;
 import ${package}.biz.service.UserService;
 import ${package}.common.util.DateUtils;
 import ${package}.common.util.Digests;
@@ -38,6 +39,7 @@ public class UserServiceImpl extends BaseService<User> implements UserService {
     private RoleMapper roleMapper;
 
     @Override
+    @LogTime
     public User findUserByUsername(String username) {
         User user = new User();
         user.setUsername(username);
@@ -46,21 +48,25 @@ public class UserServiceImpl extends BaseService<User> implements UserService {
     }
 
     @Override
+    @LogTime
     public ShiroUser getShiroUser() {
         return (ShiroUser) SecurityUtils.getSubject().getPrincipal();
     }
 
     @Override
+    @LogTime
     public User findUserById(Long id) {
         return super.selectByPrimaryKey(id);
     }
 
     @Override
+    @LogTime
     public void updateUser(User user) {
         super.updateByPrimaryKeySelective(user);
     }
 
     @Override
+    @LogTime
     public void updateUserLoginTime(User user) {
         user = findUserByUsername(user.getUsername());
         if (user != null) {
@@ -72,18 +78,21 @@ public class UserServiceImpl extends BaseService<User> implements UserService {
     }
 
     @Override
+    @LogTime
     public void saveUser(User user) {
         entryptPassword(user);
         super.insertSelective(user);
     }
 
     @Override
+    @LogTime
     public void saveUserWithDefaultRole(User user) {
         saveUser(user);
         saveUserRoles(user.getId(), AppConstants.DEFAULT_ROLE_CODE);
     }
 
     @Override
+    @LogTime
     public boolean existsUsername(String username) {
         User user = new User();
         user.setUsername(username);
@@ -91,6 +100,7 @@ public class UserServiceImpl extends BaseService<User> implements UserService {
     }
 
     @Override
+    @LogTime
     public List<User> searchUsers(int pageNum, int pageSize, String username, String nickName) {
         Example example = new Example(User.class);
         Example.Criteria criteria = example.createCriteria();
@@ -110,6 +120,7 @@ public class UserServiceImpl extends BaseService<User> implements UserService {
     }
 
     @Override
+    @LogTime
     public void updateUserRoles(Long userId, String roleCodes) {
         roleMapper.deleteAllRolesByUserId(userId);
 
@@ -119,6 +130,7 @@ public class UserServiceImpl extends BaseService<User> implements UserService {
     }
 
     @Override
+    @LogTime
     public void updateUserPassword(User user) {
         entryptPassword(user);
         updateUser(user);

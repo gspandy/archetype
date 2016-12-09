@@ -3,6 +3,7 @@
 #set( $symbol_escape = '\' )
 package ${package}.biz.service.impl;
 
+import ${package}.biz.annotation.LogTime;
 import ${package}.biz.service.MenuService;
 import ${package}.mapper.MenuMapper;
 import ${package}.model.app.vo.Menu;
@@ -27,6 +28,7 @@ public class MenuServiceImpl extends BaseService<Menu> implements MenuService {
     private MenuMapper menuMapper;
 
     @Override
+    @LogTime
     public List<Menu> findDashboardMenus(Long userId) {
         List<Menu> menus = menuMapper.selectMenus(userId, AppConstants.MENU_TYPE_DASHBOARD);
         List<Menu> wrapList = new ArrayList();
@@ -35,6 +37,7 @@ public class MenuServiceImpl extends BaseService<Menu> implements MenuService {
     }
 
     @Override
+    @LogTime
     public List<Menu> findAdminMenus(Long userId) {
         List<Menu> menus = menuMapper.selectMenus(userId, AppConstants.MENU_TYPE_ADMIN);
         List<Menu> wrapList = new ArrayList();
@@ -43,16 +46,19 @@ public class MenuServiceImpl extends BaseService<Menu> implements MenuService {
     }
 
     @Override
+    @LogTime
     public List<Menu> findMenusByUserId(Long userId) {
         return menuMapper.selectMenus(userId, AppConstants.MENU_TYPE_ALL);
     }
 
     @Override
+    @LogTime
     public List<Menu> findAdminMenus4Role(String code) {
         return menuMapper.selectMenus4Role(code, AppConstants.MENU_TYPE_ADMIN);
     }
 
     @Override
+    @LogTime
     public List<Menu> findAllAdminMenus() {
         Menu menu = new Menu();
         menu.setType(AppConstants.MENU_TYPE_ADMIN);
@@ -63,11 +69,13 @@ public class MenuServiceImpl extends BaseService<Menu> implements MenuService {
     }
 
     @Override
+    @LogTime
     public List<Menu> findDashboardMenus4Role(String code) {
         return menuMapper.selectMenus4Role(code, AppConstants.MENU_TYPE_DASHBOARD);
     }
 
     @Override
+    @LogTime
     public List<Menu> findAllDashboardMenus() {
         Menu menu = new Menu();
         menu.setType(AppConstants.MENU_TYPE_DASHBOARD);
@@ -78,21 +86,25 @@ public class MenuServiceImpl extends BaseService<Menu> implements MenuService {
     }
 
     @Override
+    @LogTime
     public Menu findMenuById(Long id) {
         return super.selectByPrimaryKey(id);
     }
 
     @Override
+    @LogTime
     public void saveMenu(Menu menu) {
         super.insertSelective(menu);
     }
 
     @Override
+    @LogTime
     public void updateMenu(Menu menu) {
         super.updateByPrimaryKeySelective(menu);
     }
 
     @Override
+    @LogTime
     public Menu findMenuByCode(String code) {
         Menu menu = new Menu();
         menu.setCode(code);
@@ -101,11 +113,13 @@ public class MenuServiceImpl extends BaseService<Menu> implements MenuService {
     }
 
     @Override
+    @LogTime
     public void deleteMenu(Menu menu) {
         super.deleteByPrimaryKey(menu.getId());
     }
 
     @Override
+    @LogTime
     public boolean existsMenuCode(String code) {
         Menu menu = new Menu();
         menu.setCode(code);

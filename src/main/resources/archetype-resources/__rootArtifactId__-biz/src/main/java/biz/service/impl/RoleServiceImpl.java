@@ -4,6 +4,7 @@
 package ${package}.biz.service.impl;
 
 import com.github.pagehelper.PageHelper;
+import ${package}.biz.annotation.LogTime;
 import ${package}.biz.service.RoleService;
 import ${package}.common.util.Collections3;
 import ${package}.mapper.RoleMapper;
@@ -32,16 +33,19 @@ public class RoleServiceImpl extends BaseService<Role> implements RoleService {
     private RoleMapper roleMapper;
 
     @Override
+    @LogTime
     public List<Role> findRolesByUserId(Long userId) {
         return roleMapper.selectRoles(userId);
     }
 
     @Override
+    @LogTime
     public List<Role> findAllRoles() {
         return super.select(new Role());
     }
 
     @Override
+    @LogTime
     public List<Role> searchRoles(int pageNum, int pageSize, String code, String name) {
         Example example = new Example(Role.class);
 
@@ -60,21 +64,25 @@ public class RoleServiceImpl extends BaseService<Role> implements RoleService {
     }
 
     @Override
+    @LogTime
     public void saveRole(Role role) {
         super.insertSelective(role);
     }
 
     @Override
+    @LogTime
     public Role findRoleById(Long id) {
         return super.selectByPrimaryKey(id);
     }
 
     @Override
+    @LogTime
     public void updateRole(Role role) {
         super.updateByPrimaryKeySelective(role);
     }
 
     @Override
+    @LogTime
     public boolean existsRoleCode(String code) {
         Role role = new Role();
         role.setCode(code);
@@ -83,6 +91,7 @@ public class RoleServiceImpl extends BaseService<Role> implements RoleService {
     }
 
     @Override
+    @LogTime
     public void updateRoleMenus(String code, List<Menu> role_menus, String menuCodes) {
         if (Collections3.isNotEmpty(role_menus)) {
             deleteRoleMenus(code, Collections3.extractToList(role_menus, "code"));

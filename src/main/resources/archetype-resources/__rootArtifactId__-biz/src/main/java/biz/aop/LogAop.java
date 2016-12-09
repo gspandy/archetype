@@ -1,9 +1,9 @@
-package com.shhxzq.fin.rms.biz.aop;
+package ${package}.biz.aop;
 
-import com.shhxzq.fin.rms.biz.annotation.LogTime;
-import com.shhxzq.fin.rms.biz.util.AopUtil;
-import com.shhxzq.fin.rms.biz.util.AppProperties;
-import com.shhxzq.fin.rms.common.util.DateUtils;
+import ${package}.biz.annotation.LogTime;
+import ${package}.biz.util.AopUtil;
+import ${package}.biz.util.PropertiesUtil;
+import ${package}.common.util.DateUtils;
 import lombok.extern.log4j.Log4j2;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.reflect.MethodSignature;
@@ -27,7 +27,7 @@ public class LogAop {
     private Long slowMethodTime;
 
     public LogAop() {
-        String val = AppProperties.getPropertiesOrDefault("slow.method.time", "10");
+        String val = PropertiesUtil.getPropertiesOrDefault("slow.method.time", "10");
         slowMethodTime = Long.parseLong(val);
     }
 

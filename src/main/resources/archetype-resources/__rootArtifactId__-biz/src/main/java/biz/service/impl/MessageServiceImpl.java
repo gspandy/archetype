@@ -4,6 +4,7 @@
 package ${package}.biz.service.impl;
 
 import com.github.pagehelper.PageHelper;
+import ${package}.biz.annotation.LogTime;
 import ${package}.biz.service.MessageService;
 import ${package}.biz.service.UserService;
 import ${package}.common.util.Collections3;
@@ -33,17 +34,20 @@ public class MessageServiceImpl extends BaseService<Message> implements MessageS
     private UserService userService;
 
     @Override
+    @LogTime
     public List<Message> searchMessages(int pageNum, int pageSize, String title, String type) {
         PageHelper.startPage(pageNum, pageSize);
         return messageMapper.searchMessage(0L, title, type, null);
     }
 
     @Override
+    @LogTime
     public List<Message> findMessagesByUserId(Long userId, int pageNum, int pageSize, String type, String isRead) {
         return messageMapper.searchMessage(userId, null, type, isRead);
     }
 
     @Override
+    @LogTime
     public void saveMessageWithReceiverUsers(Message message, String receiverUsers) {
         super.insertSelective(message);
 
@@ -59,6 +63,7 @@ public class MessageServiceImpl extends BaseService<Message> implements MessageS
     }
 
     @Override
+    @LogTime
     public Message findMessageById(Long id) {
         ShiroUser user = userService.getShiroUser();
 
@@ -66,6 +71,7 @@ public class MessageServiceImpl extends BaseService<Message> implements MessageS
     }
 
     @Override
+    @LogTime
     public void updateMessageForRead(String ids) {
         ShiroUser user = userService.getShiroUser();
 
