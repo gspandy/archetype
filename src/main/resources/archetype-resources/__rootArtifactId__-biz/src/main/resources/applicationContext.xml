@@ -47,19 +47,19 @@
         </tx:attributes>
     </tx:advice>
 
-    <!-- 配置事务AOP切面 -->
+    <!-- 配置AOP切面 -->
     <aop:config>
-        <aop:pointcut id="transactionPointcut" expression="execution(* ${package}.biz.service.impl..*.*(..))"/>
-        <aop:advisor pointcut-ref="transactionPointcut" advice-ref="transactionAdvice"/>
-    </aop:config>
+        <!--切点，用于事务-->
+        <aop:pointcut id="transactionPointcut" expression="execution(* com.shhxzq.fin.rms.biz.service.impl..*.*(..))"/>
+        <!--切点，用于日志-->
+        <aop:pointcut id="target" expression="execution(* com.shhxzq.fin.rms..*.*(..))"/>
 
-    <!-- 服务层AOP begin -->
-    <aop:config>
-        <aop:aspect id="serviceAspect" ref="logAop">
-            <aop:pointcut id="target" expression="execution(* ${package}.biz.impl..*.*(..))" />
-            <aop:around method="around" pointcut-ref="target" />
+        <!--事物切面-->
+        <aop:advisor pointcut-ref="transactionPointcut" advice-ref="transactionAdvice" order="1"/>
+        <!--日志切面-->
+        <aop:aspect id="logAspect" ref="logAop" order="2">
+            <aop:around method="around" pointcut-ref="target"/>
         </aop:aspect>
     </aop:config>
-    <!-- 服务层AOP end -->
 
 </beans>

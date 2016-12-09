@@ -3,7 +3,7 @@
 #set( $symbol_escape = '\' )
 package ${package}.web.util;
 
-import ${package}.biz.util.AntxUtil;
+import ${package}.biz.util.AppProperties;
 import ${package}.model.constants.AppConstants;
 import net.coobird.thumbnailator.Thumbnails;
 
@@ -30,10 +30,10 @@ public class Images {
 
     private static String thumbnails(String source, String suffix, int width, int height) throws Exception {
         String desc = FileUpload.extractFilePath(source, suffix);
-        Thumbnails.of(AntxUtil.getProperties(AppConstants.FILE_PATH_ROOT) + source)
+        Thumbnails.of(AppProperties.getProperties(AppConstants.FILE_PATH_ROOT) + source)
                 .size(width, height)
                 .keepAspectRatio(false)
-                .toFile(AntxUtil.getProperties(AppConstants.FILE_PATH_ROOT) + desc);
+                .toFile(AppProperties.getProperties(AppConstants.FILE_PATH_ROOT) + desc);
 
         return desc;
     }

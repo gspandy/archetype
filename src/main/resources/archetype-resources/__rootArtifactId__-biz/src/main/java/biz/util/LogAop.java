@@ -1,16 +1,18 @@
-#set( $symbol_pound = '#' )
-#set( $symbol_dollar = '$' )
-#set( $symbol_escape = '\' )
-package ${package}.biz.util;
+package com.shhxzq.fin.rms.biz.aop;
 
-import com.alibaba.fastjson.JSON;
-import ${package}.common.util.DateUtils;
+import com.shhxzq.fin.rms.biz.annotation.LogTime;
+import com.shhxzq.fin.rms.biz.util.AopUtil;
+import com.shhxzq.fin.rms.biz.util.AppProperties;
+import com.shhxzq.fin.rms.common.util.DateUtils;
 import lombok.extern.log4j.Log4j2;
 import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.stereotype.Component;
 
+import java.lang.reflect.Method;
+
 /**
- * 打印入参合出参，打印方法执行时间
+ * 打印入参合出参，打印方法执行时间, 慢方法打印error日志
  *
  * @author kangyonggan
  * @since 2016/11/30
@@ -20,24 +22,48 @@ import org.springframework.stereotype.Component;
 public class LogAop {
 
     /**
+     * 设定的方法最大执行时间
+     */
+    private Long slowMethodTime;
+
+    public LogAop() {
+        String val = AppProperties.getPropertiesOrDefault("slow.method.time", "10");
+        slowMethodTime = Long.parseLong(val);
+    }
+
+    /**
      * @param joinPoint
      * @return
      * @throws Throwable
      */
     public Object around(ProceedingJoinPoint joinPoint) throws Throwable {
-        Class clazz = joinPoint.getTarget().getClass();
-        String methodName = joinPoint.getSignature().getName();
         Object args[] = joinPoint.getArgs();
+        Class clazz = joinPoint.getTarget().getClass();
 
-        String targetName = "LogAop[" + clazz.getName() + "." + methodName + "] - ";
-        log.info(targetName + "args:" + JSON.toJSONString(args));
+        MethodSignature methodSignature = (MethodSignature) joinPoint.getSignature();
+        Method method = clazz.getMethod(methodSignature.getName(), methodSignature.getParameterTypes());
+        String targetName = "[" + clazz.getName() + "." + method.getName() + "]";
 
-        long beginTime = DateUtils.getNow().getTime();
-        Object result = joinPoint.proceed(args);
-        long endTime = DateUtils.getNow().getTime();
+        LogTime logTime = method.getAnnotation(LogTime.class);
+        Object result;
+        if (logTime != null) {
+            log.info("进入方法:" + targetName + " - args:" + AopUtil.getStringFromRequest(args));
 
-        log.info(targetName + "return:" + JSON.toJSONString(result));
-        log.info(targetName + "耗时" + (endTime - beginTime) + "ms");
+            long beginTime = DateUtils.getNow().getTime();
+            result = joinPoint.proceed(args);
+            long endTime = DateUtils.getNow().getTime();
+            long time = endTime - beginTime;
+
+            log.info("离开方法:" + targetName + " - return:" + AopUtil.getStringFromResponse(result));
+            log.info("方法耗时:" + time + "ms - " + targetName);
+
+            if (time > slowMethodTime * 1000) {
+                log.error("方法执行超过设定时间" + slowMethodTime + "s," + targetName);
+            }
+        } else {
+            result = joinPoint.proceed(args);
+        }
+
         return result;
     }
 }

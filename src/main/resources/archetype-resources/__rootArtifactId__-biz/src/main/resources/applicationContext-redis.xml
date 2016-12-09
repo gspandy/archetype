@@ -28,16 +28,4 @@
             <bean class="org.springframework.data.redis.serializer.JdkSerializationRedisSerializer"/>
         </property>
     </bean>
-
-    <bean id="redisCacheManager" class="org.springframework.data.redis.cache.RedisCacheManager">
-        <constructor-arg ref="redisTemplate" />
-    </bean>
-
-    <!--自定义缓存配置-->
-    <bean id="redisCacheConfig" class="${package}.biz.util.RedisCacheConfig">
-        <constructor-arg ref="jedisConnectionFactory" />
-        <constructor-arg ref="redisTemplate" />
-        <constructor-arg ref="redisCacheManager" />
-    </bean>
-
 </beans>
