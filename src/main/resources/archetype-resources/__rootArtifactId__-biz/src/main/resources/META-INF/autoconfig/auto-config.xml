@@ -34,7 +34,7 @@
         <property name="redis.prefix.key" description="redis键的前缀" defaultValue="${parentArtifactId}"/>
     </group>
     <script>
-        <generate template="app.properties"/>
+        <generate template="${parentArtifactId}.properties"/>
         <generate template="applicationContext-provider.xml"/>
         <generate template="applicationContext-datasource.xml"/>
         <generate template="applicationContext-redis.xml"/>
